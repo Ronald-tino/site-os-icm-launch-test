@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Pre-push hook: refuses to push directly to a default branch (main or master)
+# from this checkout.
+#
+# Rationale: _system/conventions.md section 7 says an agent commits to its own
+# branch and never merges or deploys, no matter who asked or how it was
+# phrased. That rule was prose-only: nothing stopped a push straight to the
+# default branch except the agent choosing not to. This hook is a local,
+# repo-level mechanical backstop for a solo operator who has not (or cannot)
+# configure server-side branch protection on the hosting remote.
+#
+# This is a backstop, not a replacement: once a real hosting remote exists,
+# also enable branch protection there (required review, no direct pushes).
+# This hook only protects this one local checkout.
+
+set -euo pipefail
+
+protected_branches="main master"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  for b in $protected_branches; do
+    if [ "$remote_ref" = "refs/heads/$b" ]; then
+      echo "PUSH BLOCKED: direct push to '$b' is not allowed from this checkout." >&2
+      echo "Per _system/conventions.md section 7: commit to a branch and open a" >&2
+      echo "pull request or diff for a human to review and merge instead." >&2
+      exit 1
+    fi
+  done
+done
+
+exit 0

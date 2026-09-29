@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Runs the same token-drift check as pre-commit, for merge commits.
+#
+# Git fires a *different* hook for a commit created by `git merge`
+# (pre-merge-commit), not pre-commit. Without this file, merging a branch
+# that introduces a raw hex color would bring it in with zero check, which
+# defeats the point: a real commit under review would still get flagged, but
+# the merge that actually publishes it would not be. See lib-check-tokens.sh
+# for the shared logic and pre-commit for the same check on an ordinary
+# commit.
+
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DIR/lib-check-tokens.sh"
+check_token_drift

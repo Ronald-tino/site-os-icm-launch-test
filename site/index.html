@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linden Family Dental (launch test)</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); font-size: var(--size-base); line-height: 1.6; overflow-wrap: break-word; }
+  h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  a { color: var(--color-primary); }
+  a:focus-visible, .button:focus-visible { outline: 3px solid var(--color-text); outline-offset: 3px; border-radius: 8px; }
+  .sample-note { background: var(--color-surface-dark); color: var(--color-on-dark); text-align: center; font-size: 0.85rem; padding: var(--space-unit) var(--space-m); margin: 0; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: var(--space-m); top: var(--space-m); background: var(--color-bg); padding: var(--space-s); }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--space-m); }
+  .topbar { background: var(--color-tint); font-size: 0.9rem; }
+  .topbar .wrap { display: flex; justify-content: space-between; gap: var(--space-m); flex-wrap: wrap; padding-top: var(--space-unit); padding-bottom: var(--space-unit); }
+  .pill { display: inline-block; background: var(--color-accent); color: var(--color-text); border-radius: 999px; padding: 0.2rem 0.9rem; font-weight: 600; text-decoration: none; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-m); padding-top: var(--space-m); padding-bottom: var(--space-m); flex-wrap: wrap; }
+  .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem; color: var(--color-text); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: var(--space-m); margin: 0; padding: 0; flex-wrap: wrap; }
+  nav a { color: var(--color-text); text-decoration: none; }
+  .button { display: inline-block; background: var(--color-primary); color: var(--color-on-primary); padding: 0.85rem 1.6rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-l); align-items: center; padding-top: var(--space-l); padding-bottom: var(--space-l); }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); }
+  .hero p { font-size: 1.2rem; color: var(--color-text-muted); max-width: 32rem; margin: var(--space-m) 0; }
+  .photo { background: var(--color-tint); border: 2px dashed var(--color-border); border-radius: calc(var(--radius) * 1.8); aspect-ratio: 6 / 5; display: grid; place-items: center; color: var(--color-text-muted); text-align: center; padding: var(--space-m); }
+  .reassure { padding-bottom: var(--space-l); }
+  .reassure ul { list-style: none; margin: 0; padding: var(--space-m); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-m); background: var(--color-tint); border-radius: var(--radius); }
+  .reassure li strong { display: block; font-family: var(--font-heading); font-size: 1.1rem; }
+  .section { padding: var(--space-l) 0; }
+  .split { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-l); align-items: start; }
+  .section h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: var(--space-m); }
+  .treatments { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-s); }
+  .treatments li { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-m); display: flex; justify-content: space-between; gap: var(--space-m); }
+  .treatments strong { font-family: var(--font-heading); font-size: 1.1rem; }
+  .minutes { white-space: nowrap; font-size: 0.85rem; background: var(--color-tint); border-radius: 999px; padding: 0.15rem 0.7rem; align-self: start; }
+  .path { background: var(--color-tint); border-radius: calc(var(--radius) * 1.5); padding: var(--space-l) var(--space-m); }
+  .path ol { list-style: none; margin: var(--space-m) 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-m); position: relative; }
+  .path ol::before { content: ""; position: absolute; top: 1.4rem; left: 8%; right: 8%; border-top: 2px dotted var(--color-primary); }
+  .path li { position: relative; text-align: center; }
+  .step { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; margin: 0 auto var(--space-s); border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-primary); font-family: var(--font-heading); font-weight: 800; color: var(--color-primary); }
+  .path strong { display: block; font-family: var(--font-heading); }
+  .path p { margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--color-text-muted); }
+  .book { background: var(--color-surface-dark); color: var(--color-on-dark); border-radius: calc(var(--radius) * 1.8); padding: var(--space-l) var(--space-m); display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-l); }
+  .book h2 { color: var(--color-on-dark); }
+  .book a { color: var(--color-on-dark); }
+  .book .button { background: var(--color-on-dark); color: var(--color-surface-dark); }
+  .hours { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem var(--space-m); margin: 0; }
+  .hours dd { margin: 0; }
+  footer { padding: var(--space-l) 0 var(--space-m); color: var(--color-text-muted); font-size: 0.9rem; }
+  @media (max-width: 820px) {
+    .hero .wrap, .split, .book { grid-template-columns: 1fr; gap: var(--space-m); }
+    .reassure ul { grid-template-columns: 1fr 1fr; }
+    .path ol { grid-template-columns: 1fr; text-align: left; }
+    .path ol::before { display: none; }
+    .path li { text-align: left; display: grid; grid-template-columns: 2.8rem 1fr; gap: var(--space-s); }
+    .step { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<p class="sample-note" data-sample-only>Launch test of the Site OS ICM kit. The practice, people and text are made up.</p>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar"><div class="wrap">
+  <a class="pill" href="tel:+000000000" data-slot="emergency">Pain today? 000 123 999</a>
+  <span data-slot="topbar-facts">German, English, Turkish and Polish spoken. Step-free access.</span>
+</div></div>
+<header><div class="wrap">
+  <a class="logo" href="#" data-slot="business-name">Linden Family Dental</a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#treatments" data-slot="nav-treatments">Treatments</a></li>
+    <li><a href="#first-visit" data-slot="nav-first-visit">Your first visit</a></li>
+    <li><a href="#book" data-slot="nav-contact">Contact</a></li>
+  </ul></nav>
+  <a class="button" href="#book" data-slot="main-action">Book a visit</a>
+</div></header>
+
+<main id="main">
+  <section class="hero"><div class="wrap">
+    <div>
+      <h1 data-slot="headline">A dentist you do not have to be brave for</h1>
+      <p data-slot="intro">We go at your pace. Nothing happens until you are ready. A family practice for grown-ups, children and everyone who would rather be somewhere else.</p>
+      <a class="button" href="#book" data-slot="hero-action">Book a first visit</a>
+    </div>
+    <div class="photo" role="img" aria-label="The practice's own photo of a gentle moment with a patient" data-slot="hero-image">Your own photo:<br>a calm moment in your practice</div>
+  </div></section>
+
+  <section class="reassure"><div class="wrap">
+    <ul>
+      <li><strong data-slot="promise-1">Nervous patients welcome</strong><span data-slot="promise-1-text">Tell us once and we plan more time.</span></li>
+      <li><strong data-slot="promise-2">Children welcome</strong><span data-slot="promise-2-text">Short, playful first visits.</span></li>
+      <li><strong data-slot="promise-3">We speak 4 languages</strong><span data-slot="promise-3-text">German, English, Turkish, Polish.</span></li>
+      <li><strong data-slot="promise-4">Step-free and parking</strong><span data-slot="promise-4-text">Ground floor, wide doors.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section" id="treatments"><div class="wrap split">
+    <div>
+      <h2 data-slot="treatments-heading">What we do, in plain words</h2>
+      <p data-slot="treatments-intro">No jargon and no upselling. Every treatment explained the way we would explain it to a friend, with what your insurance usually covers.</p>
+    </div>
+    <ul class="treatments">
+      <li><span><strong data-slot="treatment">Check-up</strong><br><span data-slot="treatment-text">We look at your teeth and gums, tell you what we see, and only then decide together.</span></span><span class="minutes" data-slot="minutes">30 min</span></li>
+      <li><span><strong data-slot="treatment">Children's visits</strong><br><span data-slot="treatment-text">Short, playful visits from the first tooth on.</span></span><span class="minutes" data-slot="minutes">20 min</span></li>
+      <li><span><strong data-slot="treatment">Professional cleaning</strong><br><span data-slot="treatment-text">A deep clean by our hygienist, for the places a toothbrush misses.</span></span><span class="minutes" data-slot="minutes">60 min</span></li>
+      <li><span><strong data-slot="treatment">Pain and emergencies</strong><br><span data-slot="treatment-text">Same-day time for people in pain, every day we are open.</span></span><span class="minutes" data-slot="minutes">30 min</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section" id="first-visit"><div class="wrap">
+    <div class="path">
+      <h2 data-slot="path-heading">Your first visit, step by step</h2>
+      <ol>
+        <li><span class="step">1</span><span><strong data-slot="step">You call, or book online</strong><p data-slot="step-text">Tell us if you are nervous. We note it.</p></span></li>
+        <li><span class="step">2</span><span><strong data-slot="step">A quiet welcome</strong><p data-slot="step-text">A cup of tea and a short form. No queue.</p></span></li>
+        <li><span class="step">3</span><span><strong data-slot="step">A talk before the chair</strong><p data-slot="step-text">Face to face, sitting up, about what worries you.</p></span></li>
+        <li><span class="step">4</span><span><strong data-slot="step">A gentle look</strong><p data-slot="step-text">We tell you what we see. Nothing happens without your yes.</p></span></li>
+        <li><span class="step">5</span><span><strong data-slot="step">And then you go home</strong><p data-slot="step-text">With a plain plan and the next date, if you need one.</p></span></li>
+      </ol>
+    </div>
+  </div></section>
+
+  <section class="section" id="book"><div class="wrap">
+    <div class="book">
+      <div>
+        <h2 data-slot="book-heading">Ready when you are</h2>
+        <p data-slot="book-text">Book online, or call and talk to us. If you are nervous, say so. It changes how we plan your visit, not what it costs.</p>
+        <a class="button" href="#" data-slot="book-action">Request an appointment</a>
+        <p data-slot="phone"><a href="tel:+000000000">000 123 456</a></p>
+      </div>
+      <dl class="hours" aria-label="Opening hours" data-slot="hours">
+        <dt>Mon to Thu</dt><dd>8:00 to 12:30, 13:30 to 18:00</dd>
+        <dt>Friday</dt><dd>8:00 to 14:00</dd>
+        <dt>Sat, Sun</dt><dd>Closed</dd>
+      </dl>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap" data-slot="footer">Linden Family Dental, 14 Linden Street, 00000 Sample Town. Impressum. Privacy.</div></footer>
+</body>
+</html>

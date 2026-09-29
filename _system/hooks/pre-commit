@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Pre-commit hook: refuses to commit a raw hex color literal that appears
+# outside docs/design-tokens.md or an explicitly allowlisted generated file.
+#
+# Rationale: _system/conventions.md section 8 says design-tokens.md is binding
+# and any generated token file is generated from it, never hand-edited. That
+# rule was prose-only and had already failed once for real (a live project this
+# kit was extracted from shipped an undocumented color on five pages, plus
+# several raw hex values bypassing the token system entirely, with no
+# adversary involved: nothing technical was checking). This hook is the
+# mechanical backstop. See _system/hooks/lib-check-tokens.sh for the check
+# itself (shared with pre-merge-commit) and _system/hooks/README.md for its
+# stated limits.
+#
+# Configure exceptions in _system/token-drift-allowlist.txt: one path or glob
+# per line, for files that are mechanically GENERATED from design-tokens.md
+# (for example a Tailwind @theme block), or the one variables-only tokens file
+# of a no-build stack (site-setup/GUIDE.md step 2b). No other hand-authored file.
+
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DIR/lib-check-tokens.sh"
+check_token_drift

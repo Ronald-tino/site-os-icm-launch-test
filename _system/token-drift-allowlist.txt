@@ -1,0 +1,29 @@
+# One path or glob per line. Only list a file here if it is mechanically
+# GENERATED from docs/design-tokens.md (for example a build step that turns
+# the tokens table into a Tailwind @theme block or a CSS custom-properties
+# file). Never list a hand-authored file that also contains real page or
+# component styling: that defeats the check in _system/hooks/pre-commit for
+# everything in it, not just the token values.
+#
+# One narrow exception, for a stack with no build step at all (plain
+# HTML/CSS, for instance): a small, dedicated file containing ONLY variable
+# definitions copied verbatim from docs/design-tokens.md (nothing else, no
+# selectors, no page rules), created per site-setup/GUIDE.md step 2b, may be
+# listed here even though nothing mechanically generated it. Every other
+# stylesheet or component must reference those variables and never contain
+# a raw value directly; the hook keeps checking everywhere except that one
+# small file.
+#
+# Never list docs/design-direction.md or anything under docs/direction/.
+# Those files describe color by role and in words only (conventions.md
+# section 8); a raw value showing up there is exactly what this hook is for.
+#
+# Keep entries as specific real paths, not broad extension globs: matching is
+# shell `case` globbing, not gitignore semantics, so a pattern like `*.css`
+# crosses directory boundaries and silently stops checking every stylesheet
+# in the repo, not just the one file you meant to exempt.
+#
+# Empty by default. Examples (uncomment and adjust if this project has one):
+# site/styles/generated-theme.css
+# site/css/tokens.css
+site/css/tokens.css
