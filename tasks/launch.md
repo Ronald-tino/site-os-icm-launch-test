@@ -18,7 +18,7 @@ Agent-done items are marked [agent]. Everything marked [you] publishes something
 ## 2. Repository and first push [you]
 Run these from this folder, one at a time:
 1. Create the empty repository: `gh repo create site-os-icm-launch-test --public --description "Throwaway launch test of the Site OS ICM kit"`
-2. Connect it: `git remote add origin https://github.com/<your-account>/site-os-icm-launch-test.git`
+2. Connect it: `git remote add origin https://github.com/Ronald-tino/site-os-icm-launch-test.git`
 3. The one-time first push of `main` (conventions section 7; only a human runs this, once): `git push --no-verify -u origin main`
 4. Switch on branch protection for `main`: GitHub, the repository, Settings, Branches (or Rules), then add a rule for `main`: require a pull request before merging, and block direct pushes.
 
