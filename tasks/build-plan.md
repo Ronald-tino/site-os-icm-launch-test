@@ -18,3 +18,4 @@ summary: "Throwaway launch test: one page built, only going live is open."
 
 ## Decisions
 - 2026-09-29: Throwaway test of the site-launch guide. Fictional business, no real facts, no web editor, no forms.
+- 2026-09-29: Launch: host Netlify (kit default), GitHub public repository site-os-icm-launch-test (fictional test site; branch protection on free GitHub needs a public repo), no domain, no forms, no web editor.
