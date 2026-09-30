@@ -32,7 +32,7 @@ The agent pushes `agent/launch-config` and opens a pull request. It never pushes
 2. Production branch `main`. Netlify reads the publish folder `site` from `netlify.toml` once it is merged; for the very first deploy of `main` (before the merge) set Publish directory to `site` by hand, and leave Build command empty.
 3. Under Site configuration, Build and deploy, Branches and deploy contexts: Deploy previews on for pull requests (the default).
 4. Deploy. Address: `https://roaring-duckanoo-e4cf9c.netlify.app` (Netlify project connected by Tobias, 2026-09-29).
-5. After the merge of PR #1 (2026-09-29 18:10 UTC) Netlify did not publish the merge commit by itself: Tobias triggered the production deploy by hand (Deploys, Trigger deploy).
+5. After the merge of PR #1 (2026-09-29 18:10 UTC) Netlify published the merge commit automatically. On 2026-09-30 at 05:58 the older pre-merge build was published again (probably a "Publish deploy" click in the Deploys list), so production showed 404 until Tobias triggered a fresh production deploy of the merge commit (06:15). Check the Published badge, not only that a deploy exists.
 
 ## 5. Forms [agent, none]
 No forms on this site.
