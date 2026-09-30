@@ -9,11 +9,11 @@ summary: "Throwaway launch test: one page built, only going live is open."
 # Build plan: Linden Family Dental (launch test)
 
 ## Open
-- [ ] Go live: site-launch guide, host Netlify (default), no custom domain for the test
 
 ## Blocked
 
 ## Done
+- Go live: live at https://roaring-duckanoo-e4cf9c.netlify.app, checks passed: 2026-09-30
 - Home page from the kind-hands gallery look: 2026-09-29
 
 ## Decisions
