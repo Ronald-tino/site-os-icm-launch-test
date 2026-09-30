@@ -31,7 +31,8 @@ The agent pushes `agent/launch-config` and opens a pull request. It never pushes
 1. app.netlify.com, then Add new project, then Import an existing project, then GitHub, then choose `site-os-icm-launch-test`.
 2. Production branch `main`. Netlify reads the publish folder `site` from `netlify.toml` once it is merged; for the very first deploy of `main` (before the merge) set Publish directory to `site` by hand, and leave Build command empty.
 3. Under Site configuration, Build and deploy, Branches and deploy contexts: Deploy previews on for pull requests (the default).
-4. Deploy. Note the `*.netlify.app` address here: [please fill in later]
+4. Deploy. Address: `https://roaring-duckanoo-e4cf9c.netlify.app` (Netlify project connected by Tobias, 2026-09-29).
+5. After the merge of PR #1 (2026-09-29 18:10 UTC) Netlify did not publish the merge commit by itself: Tobias triggered the production deploy by hand (Deploys, Trigger deploy).
 
 ## 5. Forms [agent, none]
 No forms on this site.
@@ -45,8 +46,15 @@ A real site adds its domain in Netlify (Domain management) and sets the DNS reco
 ## 8. Legal pages [agent]
 Test site only: the footer says it is a fictional launch test. A real site needs a complete Impressum and a privacy policy naming Netlify as host, with Netlify's data processing agreement in place.
 
-## 9. Launch checks on the deploy preview [agent, after step 4]
-Every page loads, no console errors, no request to any third party, security headers present, fonts load from the site itself, and the page works on a phone. Results: [please fill in later]
+## 9. Visitor access [you, done]
+Netlify protected the whole project by default (HTTP 401 on production and previews). Tobias set Project configuration, General, Visitor access to public, which also makes deploy previews public. Accepted for this fictional test site.
+
+## 9b. Launch checks [agent, done 2026-09-30]
+Run from outside, without a login, on the live address:
+- `GET /` returns 200, title "Linden Family Dental (launch test)"; HTTP redirects to HTTPS (301); an unknown path returns 404.
+- `css/tokens.css`, `fonts/fonts.css` and the woff2 files return 200; fonts are cached with `max-age=31536000, immutable`.
+- Headers present: X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy, plus Netlify's HSTS.
+- No requests to third parties from the page's own code. Netlify injects `/.netlify/scripts/hud` into public pages (its collaboration toolbar); a real client site switches that off.
 
 ## 10. Go live [you]
 Open the pull request's deploy preview, check it, then merge the pull request yourself. The merge is what publishes.
